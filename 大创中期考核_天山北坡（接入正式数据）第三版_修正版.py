@@ -195,7 +195,7 @@ def process_real_well(well_id, df_insar, df_gw, dt=DT):
     ske = np.std(signal.detrend(aligned_insar)) / (
         np.std(signal.detrend(aligned_gw)) * 1000.0
     )
-    t_rel = (dates - dates.iloc[0]).dt.days.to_numpy() / 365.0
+    t_rel = (dates - dates[0]).days.to_numpy() / 365.0
     design = np.vstack(
         [t_rel, np.cos(2 * np.pi * t_rel), np.sin(2 * np.pi * t_rel), np.ones(len(t_rel))]
     ).T
@@ -213,8 +213,8 @@ def process_real_well(well_id, df_insar, df_gw, dt=DT):
         "Time_Lag_days": time_lag_days,
         "Ske_cal": ske,
         "n_months": len(dates),
-        "common_start": dates.iloc[0].date().isoformat(),
-        "common_end": dates.iloc[-1].date().isoformat(),
+        "common_start": dates[0].date().isoformat(),
+        "common_end": dates[-1].date().isoformat(),
     }
 
 
